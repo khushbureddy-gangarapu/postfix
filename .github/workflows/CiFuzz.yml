@@ -81,5 +81,4 @@ jobs:
         dry-run: false
         report-unreproducible-crashes: true
         keep-unaffected-fuzz-targets: true
-        sanitizer: ${{ matrix.sanitizer }}
-      
+        sanitizer: ${{ matrix.sanitizer }}      
