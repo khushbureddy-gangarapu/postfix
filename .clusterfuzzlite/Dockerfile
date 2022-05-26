@@ -37,7 +37,7 @@ RUN apt-get install -y build-essential python3-dev automake cmake git flex bison
 RUN apt-get install -y lld-12 llvm-12 llvm-12-dev clang-12 || sudo apt-get install -y lld llvm llvm-dev clang
 RUN apt-get install -y gcc-$(gcc --version|head -n1|sed 's/\..*//'|sed 's/.* //')-plugin-dev libstdc++-$(gcc --version|head -n1|sed 's/\..*//'|sed 's/.* //')-dev
 RUN apt-get install -y ninja-build # for QEMU mode
-git clone https://github.com/AFLplusplus/AFLplusplus
+RUN git clone https://github.com/AFLplusplus/AFLplusplus
 cd AFLplusplus
 make distrib
 sudo make install
