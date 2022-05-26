@@ -8,5 +8,10 @@ cd postfix
 make makefiles CCARGS="${CFLAGS}"
 make
 BASE=$PWD
+
+git clone https://github.com/AFLplusplus/AFLplusplus
+cd AFLplusplus
+make distrib
+sudo make install
 ./afl-cc -fsanitize=address,undefined -ggdb -00 fuzz_mime.c fuzz_tok822.c -o fuzzer
 ./afl-fuzz -i in -o out -m none -- ./fuzzer @@
