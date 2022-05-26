@@ -50,7 +50,7 @@ RUN apt-get update && \
     
 RUN apt-get install -y build-essential python3-dev automake cmake git flex bison libglib2.0-dev libpixman-1-dev python3-setuptools
 # try to install llvm 10 and install the distro default if that fails
-RUN apt-get install -y lld-10 llvm-10 llvm-10-dev clang-10 || apt-get install -y lld llvm llvm-dev clang
+RUN apt-get install -y lld llvm-10 llvm-10-dev clang-10 || apt-get install -y lld llvm llvm-dev clang
 RUN apt-get install -y gcc-$(gcc --version|head -n1|sed 's/\..*//'|sed 's/.* //')-plugin-dev libstdc++-$(gcc --version|head -n1|sed 's/\..*//'|sed 's/.* //')-dev
 RUN apt-get install -y ninja-build # for QEMU mode
 
