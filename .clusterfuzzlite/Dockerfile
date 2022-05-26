@@ -29,9 +29,25 @@ RUN apt-get install -y \
     llvm-10 \
     clang   
 
-RUN docker pull aflplusplus/aflplusplus
-RUN docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
-RUN  apt-get update
+RUN apt-get -y install afl++
+RUN apt-get update && \
+    apt-get -y install --no-install-suggests --no-install-recommends \
+    automake \
+    cmake \
+    meson \
+    ninja-build \
+    bison flex \
+    build-essential \
+    git \
+    python3 python3-dev python3-setuptools python-is-python3 \
+    libtool libtool-bin \
+    libglib2.0-dev \
+    wget vim jupp nano bash-completion less \
+    apt-utils apt-transport-https ca-certificates gnupg dialog \
+    libpixman-1-dev \
+    gnuplot-nox \
+    && rm -rf /var/lib/apt/lists/*
+    
 RUN apt-get install -y build-essential python3-dev automake cmake git flex bison libglib2.0-dev libpixman-1-dev python3-setuptools
 # try to install llvm 12 and install the distro default if that fails
 RUN apt-get install -y lld-12 llvm-12 llvm-12-dev clang-12 || sudo apt-get install -y lld llvm llvm-dev clang
