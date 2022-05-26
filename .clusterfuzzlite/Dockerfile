@@ -29,14 +29,14 @@ RUN apt-get install -y \
     llvm-10 \
     clang   
 
-docker pull aflplusplus/aflplusplus
-docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
-sudo apt-get update
-sudo apt-get install -y build-essential python3-dev automake cmake git flex bison libglib2.0-dev libpixman-1-dev python3-setuptools
+RUN docker pull aflplusplus/aflplusplus
+RUN docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
+RUN  apt-get update
+RUN apt-get install -y build-essential python3-dev automake cmake git flex bison libglib2.0-dev libpixman-1-dev python3-setuptools
 # try to install llvm 12 and install the distro default if that fails
-sudo apt-get install -y lld-12 llvm-12 llvm-12-dev clang-12 || sudo apt-get install -y lld llvm llvm-dev clang
-sudo apt-get install -y gcc-$(gcc --version|head -n1|sed 's/\..*//'|sed 's/.* //')-plugin-dev libstdc++-$(gcc --version|head -n1|sed 's/\..*//'|sed 's/.* //')-dev
-sudo apt-get install -y ninja-build # for QEMU mode
+RUN apt-get install -y lld-12 llvm-12 llvm-12-dev clang-12 || sudo apt-get install -y lld llvm llvm-dev clang
+RUN apt-get install -y gcc-$(gcc --version|head -n1|sed 's/\..*//'|sed 's/.* //')-plugin-dev libstdc++-$(gcc --version|head -n1|sed 's/\..*//'|sed 's/.* //')-dev
+RUN apt-get install -y ninja-build # for QEMU mode
 git clone https://github.com/AFLplusplus/AFLplusplus
 cd AFLplusplus
 make distrib
