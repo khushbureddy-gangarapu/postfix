@@ -29,67 +29,20 @@ RUN apt-get install -y \
     llvm-10 \
     clang   
 
-RUN apt-get install -y gcc-7-plugin-dev   
-    
-RUN apt-get -y install afl++
-RUN apt-get update && \
-    apt-get -y install --no-install-suggests --no-install-recommends \
-    automake \
-    cmake \
-    meson \
-    ninja-build \
-    bison flex \
-    build-essential \
-    git \
-    python3 python3-dev python3-setuptools python-is-python3 \
-    libtool libtool-bin \
-    libglib2.0-dev \
-    wget vim jupp nano bash-completion less \
-    apt-utils apt-transport-https ca-certificates gnupg dialog \
-    libpixman-1-dev \
-    gnuplot-nox \
-    && rm -rf /var/lib/apt/lists/*
+docker pull aflplusplus/aflplusplus
+docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
+sudo apt-get update
+sudo apt-get install -y build-essential python3-dev automake cmake git flex bison libglib2.0-dev libpixman-1-dev python3-setuptools
+# try to install llvm 12 and install the distro default if that fails
+sudo apt-get install -y lld-12 llvm-12 llvm-12-dev clang-12 || sudo apt-get install -y lld llvm llvm-dev clang
+sudo apt-get install -y gcc-$(gcc --version|head -n1|sed 's/\..*//'|sed 's/.* //')-plugin-dev libstdc++-$(gcc --version|head -n1|sed 's/\..*//'|sed 's/.* //')-dev
+sudo apt-get install -y ninja-build # for QEMU mode
+git clone https://github.com/AFLplusplus/AFLplusplus
+cd AFLplusplus
+make distrib
+sudo make install
 
-# TODO: reactivate in timely manner
-#RUN echo "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-15 main" >> /etc/apt/sources.list && \
-#    wget -qO - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-
-RUN echo "deb http://ppa.launchpad.net/ubuntu-toolchain-r/test/ubuntu jammy main" >> /etc/apt/sources.list && \
-    apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 1E9377A2BA9EF27F
-    
-
-# arm64 doesn't have gcc-multilib, and it's only used for -m32 support on x86
-ARG TARGETPLATFORM
-RUN [ "$TARGETPLATFORM" = "linux/amd64" ] && \
-    apt-get -y install --no-install-suggests --no-install-recommends \
-    gcc-10-multilib gcc-multilib || true
-
-RUN rm -rf /var/lib/apt/lists/*
-
-ENV LLVM_CONFIG=llvm-config-10
-ENV gcc=/usr/bin/gcc.exe 
-ENV gcc=gcc-7-plugin-dev
-ENV AFL_SKIP_CPUFREQ=1
-ENV AFL_TRY_AFFINITY=1
-ENV AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1
-ENV $LIB_FUZZING_ENGINE=FuzzingEngine.a
-
-RUN git clone --depth=1 https://github.com/vanhauser-thc/afl-cov /afl-cov
-RUN cd /afl-cov && make install && cd ..
-
-
-RUN export CC=clang && export CXX=clang++
-RUN export LLVM_CONFIG=/usr/bin/llvm-config-10
-RUN export FUZZING_ENGINE=afl
-
-
-RUN sh -c 'echo set encoding=utf-8 > /root/.vimrc'
-RUN echo '. /etc/bash_completion' >> ~/.bashrc
-RUN echo 'alias joe="joe --wordwrap --joe_state -nobackup"' >> ~/.bashrc
-RUN echo "export PS1='"'[afl++ \h] \w$(__git_ps1) \$ '"'" >> ~/.bashrc
-ENV IS_DOCKER="1"
-
-COPY . $SRC/postfix
-WORKDIR postfix
+COPY . $SRC/AFLplusplus
+WORKDIR AFLplusplus
 COPY .clusterfuzzlite/build.sh $SRC/
 COPY .clusterfuzzlite/*.c .clusterfuzzlite/project.yaml $SRC/
