@@ -17,5 +17,4 @@ cd AFLplusplus
 make all
 make install
 cp $SRC/.clusterfuzzlite/fuzz_mime.c .
-
-
+./afl-cc -fsanitize=address,undefined -ggdb fuzz_mime.c -o fuzzer
