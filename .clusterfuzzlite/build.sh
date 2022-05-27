@@ -12,10 +12,11 @@ make
 BASE=$PWD
 
 git clone https://github.com/AFLplusplus/AFLplusplus
-cp $SRC/.clusterfuzzlite/fuzz_mime.c /AFLplusplus
+
 cd AFLplusplus
 make all
 make install
+cp $SRC/.clusterfuzzlite/fuzz_mime.c .
 ls -lrth
 ./afl-cc -fsanitize=address,undefined -ggdb fuzz_mime.c -o fuzzer
 ./afl-fuzz -i in -o out -m none -- ./fuzzer @@
