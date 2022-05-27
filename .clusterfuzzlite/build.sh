@@ -12,7 +12,7 @@ make
 BASE=$PWD
 
 git clone https://github.com/AFLplusplus/AFLplusplus
-cp -r postfix/.clusterfuzzlite/fuzz_mime.c /AFLplusplus
+cp $SRC/.clusterfuzzlite/fuzz_mime.c /AFLplusplus
 cd AFLplusplus
 make all
 make install
