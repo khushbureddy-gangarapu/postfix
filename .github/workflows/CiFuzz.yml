@@ -81,4 +81,13 @@ jobs:
         dry-run: false
         report-unreproducible-crashes: true
         keep-unaffected-fuzz-targets: true
-        sanitizer: ${{ matrix.sanitizer }}      
+        sanitizer: ${{ matrix.sanitizer }} 
+        
+     - name: Compile and Fuzz
+       run: |
+            ./afl-cc -fsanitize=address,undefined -ggdb fuzz_mime.c -o fuzzer
+            ./afl-fuzz -i in -o out -m none -- ./fuzzer @@
+       
+        
+        
+        
