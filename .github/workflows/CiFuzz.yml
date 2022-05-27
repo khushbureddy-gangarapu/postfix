@@ -86,7 +86,7 @@ jobs:
      - name: Compile and Fuzz
        run: |
             cd AFLplusplus
-            ./afl-cc -fsanitize=address,undefined -ggdb fuzz_mime.c -o fuzzer
+            
             ./afl-fuzz -i in -o out -m none -- ./fuzzer @@
        
         
