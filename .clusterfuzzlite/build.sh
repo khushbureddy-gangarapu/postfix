@@ -11,7 +11,7 @@ BASE=$PWD
 
 git clone https://github.com/AFLplusplus/AFLplusplus
 cd AFLplusplus
-make distrib
+make all
 make install
 cp -r .clusterfuzzlite/fuzz_mine.c AFLplusplus
 ./afl-cc -fsanitize=address,undefined -ggdb fuzz_mime.c -o fuzzer
