@@ -62,7 +62,7 @@ ENV AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1
 RUN export CC=clang && export CXX=clang++
 RUN export LLVM_CONFIG=/usr/bin/llvm-config-10
 
-COPY . $SRC/AFLplusplus
-WORKDIR AFLplusplus
+COPY . $SRC/postfix
+WORKDIR postfix
 COPY .clusterfuzzlite/build.sh $SRC/
 COPY .clusterfuzzlite/*.c .clusterfuzzlite/project.yaml $SRC/
