@@ -63,6 +63,6 @@ RUN export CC=clang && export CXX=clang++
 RUN export LLVM_CONFIG=/usr/bin/llvm-config-10
 
 WORKDIR postfix
-COPY . $SRC/postfix
+COPY . $SRC/
 COPY .clusterfuzzlite/build.sh $SRC/
 COPY .clusterfuzzlite/*.c .clusterfuzzlite/project.yaml $SRC/
