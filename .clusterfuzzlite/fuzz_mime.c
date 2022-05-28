@@ -15,7 +15,6 @@ limitations under the License.
 #include <ctype.h>
 #include <string.h>
 
-#include <msg.h>
 #include <vstring.h>
 
 #include <rec_type.h>
