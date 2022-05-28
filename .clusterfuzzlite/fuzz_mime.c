@@ -10,13 +10,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
+#include <stdlib.h>
 #include <stdarg.h>
 #include <ctype.h>
 #include <string.h>
-
-#include <vstring.h>
-
 #include <rec_type.h>
 #include <is_header.h>
 #include <header_opts.h>
@@ -25,7 +22,6 @@ limitations under the License.
 #include <lex_822.h>
 #include <mime_state.h>
 
-#include <stdlib.h>
 #include <stdint.h>
 #include <stringops.h>
 #include <vstream.h>
