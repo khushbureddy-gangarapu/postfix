@@ -16,7 +16,6 @@ limitations under the License.
 #include <string.h>
 
 #include <stdio.h>
-#include <header.h>
 #include "myheader.h"
 #include <stdarg.h>
 
