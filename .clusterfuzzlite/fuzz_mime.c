@@ -15,8 +15,6 @@ limitations under the License.
 #include <ctype.h>
 #include <string.h>
 
-#ifndef __clang__
-#include <mymalloc.h>
 #include <msg.h>
 #include <vstring.h>
 
