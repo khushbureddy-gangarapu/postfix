@@ -14,7 +14,7 @@ limitations under the License.
 #include <stdarg.h>
 #include <ctype.h>
 #include <string.h>
-#include <rec_type.h>
+
 #include <is_header.h>
 #include <header_opts.h>
 #include <mail_params.h>
@@ -24,9 +24,8 @@ limitations under the License.
 
 #include <stdint.h>
 #include <stringops.h>
-#include <vstream.h>
-#include <msg_vstream.h>
-#include <rec_streamlf.h>
+#include <stream.h>
+
 
 int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size);
 
