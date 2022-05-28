@@ -27,7 +27,8 @@ RUN apt-get install -y \
     gdb \
     llvm-dev \
     llvm-10 \
-    clang   
+    clang \
+    g++-multilib
 
 RUN apt-get -y install afl++
 RUN apt-get update && \
