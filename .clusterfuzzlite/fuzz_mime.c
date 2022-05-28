@@ -18,6 +18,14 @@ limitations under the License.
 #include <stdio.h>
 #include "myheader.h"
 #include <stdarg.h>
+#ifdef STRCASECMP_IN_STRINGS_H
+#include <strings.h>
+#endif
+
+#ifndef INADDR_NONE
+#define INADDR_NONE 0xffffff
+#endif
+
 
 #include <header_token.h>
 #include <lex_822.h>
