@@ -15,9 +15,11 @@ limitations under the License.
 #include <ctype.h>
 #include <string.h>
 
-#include <is_header.h>
-#include <header_opts.h>
-#include <mail_params.h>
+#include <stdio.h>
+#include <header.h>
+#include "myheader.h"
+#include <stdarg.h>
+
 #include <header_token.h>
 #include <lex_822.h>
 #include <mime_state.h>
